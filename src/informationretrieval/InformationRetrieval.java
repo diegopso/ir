@@ -4,6 +4,8 @@
  */
 package informationretrieval;
 
+import connection.ModelContent;
+import connection.MySqlConnect;
 import ir.BrazilianStemmer;
 import ir.Content;
 import java.util.ArrayList;
@@ -19,6 +21,14 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {        
+        ArrayList<ModelContent> contents = ModelContent.get_contents_by_user(5);
+        
+        for(ModelContent c : contents){
+            System.out.println(c);
+        }
+    }
+    
+    private static void test_count_frequency(){
         Map <String, Integer> map = new Content("Um Banco de Dados Relacional é um banco de dados que segue o Modelo Relacional. Um Banco de Dados Relacional é um conceito abstrato que define maneiras de armazenar, manipular e recuperar dados estruturados unicamente na forma de tabelas, construindo um banco de dados. O termo é aplicado aos próprios dados, quando organizados dessa forma, ou a um Sistema Gerenciador de Banco de Dados Relacional (SGBDR) – do inglês Relational database management system (RDBMS) – um programa de computador que implementa a abstração.").instance();
         
         for (Map.Entry<String, Integer> entry : map.entrySet()) {

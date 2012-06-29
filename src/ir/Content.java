@@ -1,5 +1,6 @@
 package ir;
 
+import connection.ModelContent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,6 +19,16 @@ public class Content {
     private String text;
     private ArrayList<String> terms;
     private ArrayList<Integer> frequency;
+
+    public Content() { }
+
+    public ArrayList<Integer> getFrequency() {
+        return frequency;
+    }
+
+    public ArrayList<String> getTerms() {
+        return terms;
+    }
 
     public Content(String text) {
         this.text = text.toLowerCase();
