@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import statistics.Statistics;
 
 /*
  * To change this template, choose Tools | Templates
@@ -38,6 +39,11 @@ public class Content {
         Map<String, Integer> mapTerms = WordCount.count(terms);
         frequency = new ArrayList<>(mapTerms.values());
         terms = new ArrayList<>(mapTerms.keySet());
+    }
+    
+    public Content(ArrayList<String> terms, ArrayList<Integer> frequency){
+        this.terms = terms;
+        this.frequency = frequency;
     }
     
     public void put(String term, int freq){
@@ -74,6 +80,16 @@ public class Content {
         }
         
         return new Term(term, 0);
+    }
+    
+    public static double contentSimilarity(Content alpha, Content beta){
+        Double[] alphaFreq = new Double[alpha.frequency.size()];
+        alpha.frequency.toArray(alphaFreq);
+        
+        Double[] betaFreq = new Double[beta.frequency.size()];
+        beta.frequency.toArray(betaFreq);
+        
+        return Statistics.cossine_similarity(alphaFreq, betaFreq);
     }
     
     protected class Term{

@@ -11,11 +11,11 @@ public class Statistics {
      * @param values vetor com os valores a serem somados
      * @return soma dos valores no vetor
      */
-    public static double sum(double[] values){
-        double sum = 0.0;
+    public static Double sum(Double[] values){
+        Double sum = 0.0;
         
         for (int i = 0; i < values.length; i++) {
-            sum += (double) values[i];
+            sum += (Double) values[i];
         }
         
         return sum;
@@ -26,11 +26,11 @@ public class Statistics {
      * @param values valores a serem somados
      * @return soma dos quadrados dos termos passados como parametro
      */
-    public static double square_sum(double[] values){
-        double sum = 0.0;
+    public static Double square_sum(Double[] values){
+        Double sum = 0.0;
         
         for (int i = 0; i < values.length; i++) {
-            sum += ((double)values[i]) * ((double)values[i]);
+            sum += ((Double)values[i]) * ((Double)values[i]);
         }
         
         return sum;
@@ -42,8 +42,8 @@ public class Statistics {
      * @param avg valor de centro
      * @return a soma dos quadrados das diferenças dos valores passados como parametro pelo valor de centro
      */
-    public static double square_sum(double[] values, double avg){
-        double sum = 0.0;
+    public static Double square_sum(Double[] values, Double avg){
+        Double sum = 0.0;
         
         for (int i = 0; i < values.length; i++) {
             sum += Math.pow(values[i] - avg, 2);
@@ -57,8 +57,8 @@ public class Statistics {
      * @param values valores sobre os quais deve-se calcular a média
      * @return a média dos valores passados como parametro
      */
-    public static double average(double[] values){
-        double sum = sum(values);
+    public static Double average(Double[] values){
+        Double sum = sum(values);
         return sum / values.length;
     }
     
@@ -68,11 +68,11 @@ public class Statistics {
      * @param weights peso das parcelas a serem somadas
      * @return média ponderada dos valores passados como parametro
      */
-    public static double weighted_average(double[] values, double[] weights){
-        double sum = 0.0;
+    public static Double weighted_average(Double[] values, Double[] weights){
+        Double sum = 0.0;
         
         for (int i = 0; i < values.length; i++) {
-            sum += ((double)values[i]) * ((double)weights[i]);
+            sum += ((Double)values[i]) * ((Double)weights[i]);
         }
         
         return sum / sum(weights);
@@ -84,11 +84,11 @@ public class Statistics {
      * @param bValues segundo conjunto de variaveis
      * @return o valor de correlação entre os dois conjuntos de variaveis
      */
-    public static double pearson_coeficient(double[] aValues, double[] bValues){
-        double a = average(aValues);
-        double b = average(bValues);
+    public static Double pearson_coeficient(Double[] aValues, Double[] bValues){
+        Double a = average(aValues);
+        Double b = average(bValues);
         
-        double sum = 0.0;
+        Double sum = 0.0;
         
         for (int i = 0; i < aValues.length; i++) {
             sum += Math.abs(aValues[i] - a) * Math.abs(bValues[i] - b);
@@ -102,10 +102,26 @@ public class Statistics {
      * @param values os valores sobre os quais deve-se calcular o desvio padrao
      * @return o valor do desvio padrao
      */
-    public static double standard_deviation(double[] values){
-        double avg = average(values);
-        double sum = square_sum(values, avg);
+    public static Double standard_deviation(Double[] values){
+        Double avg = average(values);
+        Double sum = square_sum(values, avg);
         
         return Math.sqrt(sum / (values.length - 1));
+    }
+    
+    /**
+     * Retorna o valor do cosseno entre dois vetores representados pelos valores passados como parametro
+     * @param aValues o primeiros conjunto de valores
+     * @param bValues o segundo conjunto de valores
+     * @return o valor do cosseno
+     */
+    public static Double cossine_similarity(Double[] aValues, Double[] bValues){
+        Double sum = 0.0;
+        
+        for (int i = 0; i < aValues.length; i++) {
+            sum += aValues[i]*bValues[i];
+        }
+        
+        return sum / (Math.sqrt(square_sum(aValues)) * Math.sqrt(square_sum(bValues)));
     }
 }
