@@ -7,6 +7,7 @@ package informationretrieval;
 import connection.*;
 import ir.*;
 import statistics.*;
+import statistics.Network.Path;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -20,7 +21,15 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {        
+        Network net = new Network();
+        net.factory();
+        net.mapPaths(0, 5, null);
+        ArrayList<Path> paths = net.paths;
         
+        for (Path path : paths) {
+            System.out.println("____________");
+            Statistics.Log(path.nodes);
+        }
     }
     
     public static void test_evaluation_correlation(){
