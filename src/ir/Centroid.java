@@ -13,9 +13,8 @@ public class Centroid {
         
         for (Content c : contents) {
             ArrayList<String> t = c.getTerms();
-            terms.retainAll(t);
-            t.addAll(terms);
-            terms = t;
+            t.removeAll(terms);
+            terms.addAll(t);
         }
         
         ArrayList<Integer> frequency = new ArrayList<Integer>(terms.size());

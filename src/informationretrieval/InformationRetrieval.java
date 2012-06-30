@@ -7,6 +7,7 @@ package informationretrieval;
 import connection.ModelContent;
 import connection.MySqlConnect;
 import ir.BrazilianStemmer;
+import ir.Centroid;
 import ir.Content;
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,11 +22,13 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {        
-        ArrayList<ModelContent> contents = ModelContent.get_contents_by_user(5);
+        ArrayList<ModelContent> aContents = ModelContent.get_contents_by_user(5);
+        ArrayList<ModelContent> bContents = ModelContent.get_contents_by_user(6);
         
-        for(ModelContent c : contents){
-            System.out.println(c);
-        }
+        ArrayList<Content> alpha = ModelContent.toContents(aContents);
+        ArrayList<Content> beta = ModelContent.toContents(bContents);
+        
+        System.out.println(Content.contentSimilarity(Centroid.getCentroid(alpha), Centroid.getCentroid(beta)));
     }
     
     private static void test_count_frequency(){

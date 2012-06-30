@@ -23,6 +23,14 @@ public class Content {
 
     public Content() { }
 
+    @Override
+    public Content clone(){
+        ArrayList<String> terms = new ArrayList<String>(this.terms);
+        ArrayList<Integer> frequency = new ArrayList<Integer>(this.frequency);
+        
+        return new Content(terms, frequency);
+    }
+
     public ArrayList<Integer> getFrequency() {
         return frequency;
     }
@@ -83,13 +91,21 @@ public class Content {
     }
     
     public static double contentSimilarity(Content alpha, Content beta){
-        Double[] alphaFreq = new Double[alpha.frequency.size()];
-        alpha.frequency.toArray(alphaFreq);
+        Content A = alpha.clone();
+        Content B = beta.clone();
         
-        Double[] betaFreq = new Double[beta.frequency.size()];
-        beta.frequency.toArray(betaFreq);
+        B.terms.removeAll(A.terms);
+        A.terms.addAll(B.terms);
         
-        return Statistics.cossine_similarity(alphaFreq, betaFreq);
+        Integer[] aFreq = new Integer[A.terms.size()];
+        Integer[] bFreq = new Integer[A.terms.size()];
+        
+        for (int i = 0; i < aFreq.length; i++) {
+            aFreq[i] = alpha.get(A.terms.get(i)).frequency;
+            bFreq[i] = beta.get(A.terms.get(i)).frequency;
+        }
+        
+        return Statistics.cossine_similarity(aFreq, bFreq);
     }
     
     protected class Term{

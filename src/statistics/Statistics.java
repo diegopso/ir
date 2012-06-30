@@ -1,5 +1,7 @@
 package statistics;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Diego
@@ -31,6 +33,21 @@ public class Statistics {
         
         for (int i = 0; i < values.length; i++) {
             sum += ((Double)values[i]) * ((Double)values[i]);
+        }
+        
+        return sum;
+    }
+    
+    /**
+     * Retorna o somatório do quadrado dos valores passados como parametro.
+     * @param values valores a serem somados
+     * @return soma dos quadrados dos termos passados como parametro
+     */
+    public static Integer square_sum(Integer[] values){
+        Integer sum = 0;
+        
+        for (int i = 0; i < values.length; i++) {
+            sum += values[i] * values[i];
         }
         
         return sum;
@@ -123,5 +140,27 @@ public class Statistics {
         }
         
         return sum / (Math.sqrt(square_sum(aValues)) * Math.sqrt(square_sum(bValues)));
+    }
+    
+    /**
+     * Retorna o valor do cosseno entre dois vetores representados pelos valores passados como parametro
+     * @param aValues o primeiros conjunto de valores
+     * @param bValues o segundo conjunto de valores
+     * @return o valor do cosseno
+     */
+    public static Double cossine_similarity(Integer[] aValues, Integer[] bValues){
+        Integer sum = 0;
+        
+        for (int i = 0; i < aValues.length; i++) {
+            sum += aValues[i]*bValues[i];
+        }
+        
+        return (double) sum / (Math.sqrt(square_sum(aValues)) * Math.sqrt(square_sum(bValues)));
+    }
+    
+    public static void Log(ArrayList<?> list){
+        for (Object object : list) {
+            System.out.println(object);
+        }
     }
 }
