@@ -16,14 +16,15 @@ import java.util.logging.Logger;
  * @author Diego
  */
 public class ModelContent {
-    public int user_id;
+    public Integer user_id, content_id;
     public String text = "";
     public String path = "Not yet...";
 
     public ModelContent() {
     }
 
-    public ModelContent(int user_id, String text) {
+    public ModelContent(Integer content_id, Integer user_id, String text) {
+        this.content_id = content_id;
         this.user_id = user_id;
         this.text = text;
     }
@@ -40,12 +41,12 @@ public class ModelContent {
             ArrayList<ModelContent> results = new ArrayList<ModelContent>();
             
             //remover especificidade de tipo = text quando for melhorar
-            ResultSet rs = db.exec("SELECT text FROM contents WHERE type = 'text' AND user_id = " + user_id + ";");
+            ResultSet rs = db.exec("SELECT id, text FROM contents WHERE type = 'text' AND user_id = " + user_id + ";");
             
             if(rs == null) return results;            
             
             while (rs.next()) {            
-                results.add(new ModelContent(user_id, rs.getString("text")));
+                results.add(new ModelContent(rs.getInt("id"), user_id, rs.getString("text")));
             }
             
             db.close();
@@ -53,6 +54,28 @@ public class ModelContent {
         } catch (SQLException ex) {
             //be safe
             return new ArrayList<ModelContent>();
+        }
+    }
+    
+    public ArrayList<ModelEvaluation> get_evaluations(){
+        return ModelEvaluation.get_evaluations_by_content(content_id);
+    }
+    
+    public static ModelContent get(Integer content_id){
+        try {
+            MySqlConnect db = new MySqlConnect();
+            db.connect();
+            
+            //remover especificidade de tipo = text quando for melhorar
+            ResultSet rs = db.exec("SELECT user_id, text FROM contents WHERE type = 'text' AND id="+ content_id +";");
+            
+            if(rs == null) return new ModelContent();
+            
+            db.close();
+            return new ModelContent(content_id, rs.getInt("user_id"), rs.getString("text"));
+        } catch (SQLException ex) {
+            //be safe
+            return new ModelContent();
         }
     }
     

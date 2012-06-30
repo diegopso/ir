@@ -24,6 +24,21 @@ public class Statistics {
     }
     
     /**
+     * Retorna o somatório dos valores do vetor passado como parametro
+     * @param values vetor com os valores a serem somados
+     * @return soma dos valores no vetor
+     */
+    private static Double sum(Integer[] values) {
+        Double sum = 0.0;
+        
+        for (int i = 0; i < values.length; i++) {
+            sum += values[i];
+        }
+        
+        return sum;
+    }
+    
+    /**
      * Retorna o somatório do quadrado dos valores passados como parametro.
      * @param values valores a serem somados
      * @return soma dos quadrados dos termos passados como parametro
@@ -70,11 +85,37 @@ public class Statistics {
     }
     
     /**
+     * Retorna o somatório dos quadrados da diferença dos valores passados como primeiro parametro pelo segundo valor passado como parametro
+     * @param values valores a serem somados
+     * @param avg valor de centro
+     * @return a soma dos quadrados das diferenças dos valores passados como parametro pelo valor de centro
+     */
+    public static Double square_sum(Integer[] values, Double avg){
+        Double sum = 0.0;
+        
+        for (int i = 0; i < values.length; i++) {
+            sum += Math.pow(values[i] - avg, 2);
+        }
+        
+        return sum;
+    }
+    
+    /**
      * Retonra a média aritmética dos valores passados como parametro.
      * @param values valores sobre os quais deve-se calcular a média
      * @return a média dos valores passados como parametro
      */
     public static Double average(Double[] values){
+        Double sum = sum(values);
+        return sum / values.length;
+    }
+    
+    /**
+     * Retonra a média aritmética dos valores passados como parametro.
+     * @param values valores sobre os quais deve-se calcular a média
+     * @return a média dos valores passados como parametro
+     */
+    private static Double average(Integer[] values) {
         Double sum = sum(values);
         return sum / values.length;
     }
@@ -108,11 +149,35 @@ public class Statistics {
         Double sum = 0.0;
         
         for (int i = 0; i < aValues.length; i++) {
-            sum += Math.abs(aValues[i] - a) * Math.abs(bValues[i] - b);
+            sum += (aValues[i] - a) * (bValues[i] - b);
         }
         
-        return sum / (Math.sqrt(square_sum(aValues, a))*Math.sqrt(square_sum(bValues, b)));
+        sum /= (Math.sqrt(square_sum(aValues, a))*Math.sqrt(square_sum(bValues, b)));
+        
+        return Double.isNaN(sum) ? 0 : sum;
     }
+    
+    /**
+     * Retorna o valor de correlação entre os dois conjuntos de variaveis passados como parametro
+     * @param aValues primeiro conjunto de variaveis
+     * @param bValues segundo conjunto de variaveis
+     * @return o valor de correlação entre os dois conjuntos de variaveis
+     */
+    public static Double pearson_coeficient(Integer[] aValues, Integer[] bValues){
+        Double a = average(aValues);
+        Double b = average(bValues);
+        
+        Double sum = 0.0;
+        
+        for (int i = 0; i < aValues.length; i++) {
+            sum += (aValues[i] - a) * (bValues[i] - b);
+        }
+        
+        sum /= (Math.sqrt(square_sum(aValues, a))*Math.sqrt(square_sum(bValues, b)));
+        
+        return Double.isNaN(sum) ? 0 : sum;
+    }
+    
     
     /**
      * Retorna o desvio padrao dos valores passados como parameto

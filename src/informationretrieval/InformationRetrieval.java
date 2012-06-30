@@ -4,11 +4,9 @@
  */
 package informationretrieval;
 
-import connection.ModelContent;
-import connection.MySqlConnect;
-import ir.BrazilianStemmer;
-import ir.Centroid;
-import ir.Content;
+import connection.*;
+import ir.*;
+import statistics.*;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -22,6 +20,22 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {        
+        
+    }
+    
+    public static void test_evaluation_correlation(){
+        ModelViewEvaluations values = ModelViewEvaluations.get_evaluations_lists(5, 6);
+        
+        Integer[] A = new Integer[values.aValues.size()];
+        Integer[] B = new Integer[values.bValues.size()];
+        
+        values.aValues.toArray(A);
+        values.bValues.toArray(B);
+        
+        System.out.println(Statistics.pearson_coeficient(A, B));
+    }
+    
+    private static void test_centroid_similarity(){
         ArrayList<ModelContent> aContents = ModelContent.get_contents_by_user(5);
         ArrayList<ModelContent> bContents = ModelContent.get_contents_by_user(6);
         
