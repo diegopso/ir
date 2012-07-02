@@ -75,7 +75,7 @@ public class Network {
             return new Path(path);
         }
 
-        public Integer[] toArray(){
+        Integer[] toArray(){
             Integer[] a = new Integer[this.nodes.size()];
             this.nodes.toArray(a);
 
