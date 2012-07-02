@@ -7,7 +7,7 @@ package informationretrieval;
 import connection.*;
 import ir.*;
 import statistics.*;
-import statistics.Network.Path;
+import wbsn.*;
 import java.util.ArrayList;
 import java.util.Map;
 
