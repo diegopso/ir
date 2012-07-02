@@ -4,7 +4,7 @@ package connection;
  *
  * @author Diego
  */
-class ModelTrust {
+public class ModelTrust {
     public Integer sink_id, source_id, trust_source_sink, trust_sink_source;
 
     public ModelTrust() {
