@@ -21,9 +21,15 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {        
-        Network net = new Network();
-        net.factory();
-        net.mapPaths(0, 5, null);
+        
+    }
+    
+    public static void test_search_network(){
+        ModelViewTrustRelashionships trust = new ModelViewTrustRelashionships();
+        trust.factory();
+        
+        Network net = new Network(trust.relationship_matrix);
+        net.mapPaths(8, 11, null);
         ArrayList<Path> paths = net.paths;
         
         for (Path path : paths) {

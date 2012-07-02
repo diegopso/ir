@@ -12,11 +12,18 @@ public class Network {
     public static ArrayList<Path> paths;
 
     public Network() {
-        this.factory();
     }
     
-    public static void factory(){
-        //mudar isso depois dos testes...
+    public Network(boolean[][] relationship_matrix) {
+        this.factory(relationship_matrix);
+    }
+    
+    public static void factory(boolean[][] relationship_matrix){
+        relationships = relationship_matrix;
+        paths = new ArrayList<Path>();
+        lineLen = relationship_matrix.length;
+        
+        /*
         relationships = new boolean[][]{
             {false, true, true, false, true, false},
             {true, false, false, true, false, true},
@@ -25,9 +32,7 @@ public class Network {
             {true, false, false, true, false, false},
             {false, true, false, false, false, false}
         };
-        
-        paths = new ArrayList<Path>();
-        lineLen = 6;
+        */
     }
     
     public void mapPaths(Integer source, Integer sink, Path previous_path){
