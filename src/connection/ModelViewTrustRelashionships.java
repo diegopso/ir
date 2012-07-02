@@ -13,7 +13,7 @@ public class ModelViewTrustRelashionships {
     public ArrayList<ModelTrust> trust_info;
 
     public ModelViewTrustRelashionships() {
-        
+        this.factory();
     }
     
     public void factory(){

@@ -12,6 +12,17 @@ public class Network {
     public static ArrayList<Path> paths;
 
     public Network() {
+        //for test
+        boolean[][] relationships_matrix = new boolean[][]{
+            {false, true, true, false, true, false},
+            {true, false, false, true, false, true},
+            {true, false, false, false, false, false},
+            {false, true, false, false, true, false},
+            {true, false, false, true, false, false},
+            {false, true, false, false, false, false}
+        };
+        
+        this.factory(relationships_matrix);
     }
     
     public Network(boolean[][] relationship_matrix) {
@@ -22,23 +33,13 @@ public class Network {
         relationships = relationship_matrix;
         paths = new ArrayList<Path>();
         lineLen = relationship_matrix.length;
-        
-        /*
-        relationships = new boolean[][]{
-            {false, true, true, false, true, false},
-            {true, false, false, true, false, true},
-            {true, false, false, false, false, false},
-            {false, true, false, false, true, false},
-            {true, false, false, true, false, false},
-            {false, true, false, false, false, false}
-        };
-        */
     }
     
-    public void mapPaths(Integer source, Integer sink, Path previous_path){
-        if(previous_path == null){
-            previous_path = new Path();
-        }
+    public void mapPaths(Integer source, Integer sink){
+        mapPaths(source, sink, new Path());
+    }
+    
+    private void mapPaths(Integer source, Integer sink, Path previous_path){
         previous_path.add(source);
         
         for (int i = 0; i < lineLen; i++) {

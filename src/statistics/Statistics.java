@@ -223,6 +223,10 @@ public class Statistics {
         return (double) sum / (Math.sqrt(square_sum(aValues)) * Math.sqrt(square_sum(bValues)));
     }
     
+    /**
+     * Imprime os itens de um ArrayList, para propósitos de depuracao.
+     * @param list
+     */
     public static void Log(ArrayList<?> list){
         for (Object object : list) {
             System.out.println(object);
