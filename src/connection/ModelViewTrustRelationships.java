@@ -8,11 +8,11 @@ import java.util.ArrayList;
  *
  * @author Diego
  */
-public class ModelViewTrustRelashionships {
+public class ModelViewTrustRelationships {
     public boolean[][] relationship_matrix;
     public ArrayList<ModelTrust> trust_info;
 
-    public ModelViewTrustRelashionships() {
+    public ModelViewTrustRelationships() {
         this.factory();
     }
     

@@ -20,12 +20,16 @@ public class InformationRetrieval {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {        
-        test_search_network();
+    public static void main(String[] args) {
+        
+    }
+    
+    public static void test_trust_inference(){
+        System.out.println(Trust.trust_between(8, 11));
     }
     
     public static void test_search_network(){
-        ModelViewTrustRelashionships trust = new ModelViewTrustRelashionships();
+        ModelViewTrustRelationships trust = new ModelViewTrustRelationships();
         
         Network net = new Network(trust.relationship_matrix);
         net.mapPaths(8, 11);

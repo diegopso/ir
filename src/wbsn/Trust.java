@@ -1,6 +1,6 @@
 package wbsn;
 
-import connection.ModelTrust;
+import connection.*;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +8,21 @@ import java.util.ArrayList;
  * @author Diego
  */
 public class Trust {
-    public static double trust_by_path(Path path, ArrayList<ModelTrust> trust_info){
+    public static double trust_between(Integer source_id, Integer sink_id){
+        ModelViewTrustRelationships relationships = new ModelViewTrustRelationships();
+        Network net = new Network(relationships.relationship_matrix);
+        net.mapPaths(source_id, sink_id);
+        
+        ArrayList<Path> paths = net.paths;
+        double sum = 0.0;
+        for (Path path : paths) {
+            sum += trust_by_path(path, relationships.trust_info);
+        }
+        
+        return sum / paths.size();
+    }
+    
+    protected static double trust_by_path(Path path, ArrayList<ModelTrust> trust_info){
         Integer[] nodes = new Integer[path.nodes.size()];
         path.nodes.toArray(nodes);
         
@@ -22,9 +36,9 @@ public class Trust {
             
             for (int j = 0; j < trust.length; j++) {
                 if(trust[j].sink_id == sink_id && trust[j].source_id == source_id){
-                    t *= trust[j].trust_source_sink;
+                    t *= ((double)trust[j].trust_source_sink / 10);
                 }else if(trust[j].sink_id == source_id && trust[j].source_id == sink_id){
-                    t *= trust[j].trust_sink_source;
+                    t *= ((double)trust[j].trust_sink_source / 10);
                 }
             }
         }
