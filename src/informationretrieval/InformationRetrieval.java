@@ -1,16 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package informationretrieval;
 
-import elements.*;
+import tsweetselements.OpinionCorrelation;
+import tsweetselements.TrustTransitivity;
 import connection.*;
 import ir.*;
 import statistics.*;
 import wbsn.*;
 import java.util.ArrayList;
 import java.util.Map;
+import tsweetselements.MaturityLevel;
 
 /**
  *
@@ -22,7 +20,7 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        System.out.println(MaturityLevel.get_level(5));
     }
     
     public static void test_trust_inference(){
@@ -43,7 +41,7 @@ public class InformationRetrieval {
     }
     
     public static void test_evaluation_correlation(){
-        System.out.println(OpinionCorrelation.correlation_between(5, 6));
+        System.out.println(OpinionCorrelation.correlation_between(8, 11));
     }
     
     private static void test_centroid_similarity(){

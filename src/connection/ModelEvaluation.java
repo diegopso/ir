@@ -28,6 +28,28 @@ public class ModelEvaluation {
         return ModelContent.get(object_id);
     }
     
+    public static ArrayList<ModelEvaluation> get_evaluations_for_user(Integer user_id){
+        try {
+            MySqlConnect db = new MySqlConnect();
+            db.connect();
+            ArrayList<ModelEvaluation> results = new ArrayList<ModelEvaluation>();
+            
+            ResultSet rs = db.exec("SELECT e.object_id, e.value FROM evaluations e INNER JOIN contents c ON e.object_id = c.id AND e.object_type = 'content' WHERE c.user_id = " + user_id + ";");
+            
+            if(rs == null) return results;            
+            
+            while (rs.next()) {
+                results.add(new ModelEvaluation(user_id, rs.getInt("object_id"), rs.getInt("value")));
+            }
+            
+            db.close();
+            return results;
+        } catch (SQLException ex) {
+            //be safe
+            return new ArrayList<ModelEvaluation>();
+        }
+    }
+    
     public static ArrayList<ModelEvaluation> get_evaluations_by_user(Integer user_id){
         try {
             MySqlConnect db = new MySqlConnect();
