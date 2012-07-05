@@ -1,13 +1,15 @@
-package wbsn;
+package elements;
 
 import connection.*;
 import java.util.ArrayList;
+import wbsn.Network;
+import wbsn.Path;
 
 /**
  *
  * @author Diego
  */
-public class Trust {
+public class TrustTransitivity {
     public static double trust_between(Integer source_id, Integer sink_id){
         ModelViewTrustRelationships relationships = new ModelViewTrustRelationships();
         Network net = new Network(relationships.relationship_matrix);

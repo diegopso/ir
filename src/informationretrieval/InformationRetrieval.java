@@ -4,6 +4,7 @@
  */
 package informationretrieval;
 
+import elements.*;
 import connection.*;
 import ir.*;
 import statistics.*;
@@ -25,7 +26,7 @@ public class InformationRetrieval {
     }
     
     public static void test_trust_inference(){
-        System.out.println(Trust.trust_between(8, 11));
+        System.out.println(TrustTransitivity.trust_between(8, 11));
     }
     
     public static void test_search_network(){
@@ -42,15 +43,7 @@ public class InformationRetrieval {
     }
     
     public static void test_evaluation_correlation(){
-        ModelViewEvaluations values = ModelViewEvaluations.get_evaluations_lists(5, 6);
-        
-        Integer[] A = new Integer[values.aValues.size()];
-        Integer[] B = new Integer[values.bValues.size()];
-        
-        values.aValues.toArray(A);
-        values.bValues.toArray(B);
-        
-        System.out.println(Statistics.pearson_coeficient(A, B));
+        System.out.println(OpinionCorrelation.correlation_between(5, 6));
     }
     
     private static void test_centroid_similarity(){
