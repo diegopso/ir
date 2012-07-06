@@ -34,7 +34,7 @@ public class ModelEvaluation {
             db.connect();
             ArrayList<ModelEvaluation> results = new ArrayList<ModelEvaluation>();
             
-            ResultSet rs = db.exec("SELECT e.object_id, e.value FROM evaluations e INNER JOIN contents c ON e.object_id = c.id AND e.object_type = 'content' WHERE c.user_id = " + user_id + ";");
+            ResultSet rs = db.exec("SELECT e.object_id, e.value FROM evaluations e INNER JOIN contents c ON e.object_id = c.id AND e.object_type = 'content' WHERE c.user_id = " + user_id + " AND e.value IS NOT NULL;");
             
             if(rs == null) return results;            
             

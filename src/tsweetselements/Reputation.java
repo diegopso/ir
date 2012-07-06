@@ -14,7 +14,13 @@ import java.util.ArrayList;
 public class Reputation {
     public static Double get_reputation(Integer user_id){
         ArrayList<Double> values = new ModelReputation(user_id).values;
-        Double[] values_avg = new Double[values.size()];
+        
+        int size = values.size();
+        
+        if(size == 0)
+            return 0.0;
+        
+        Double[] values_avg = new Double[size];
         values.toArray(values_avg);
         
         return statistics.Statistics.average(values_avg);

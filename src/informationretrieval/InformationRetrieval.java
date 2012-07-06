@@ -8,8 +8,7 @@ import statistics.*;
 import wbsn.*;
 import java.util.ArrayList;
 import java.util.Map;
-import tsweetselements.MaturityLevel;
-import tsweetselements.Reputation;
+import tsweetselements.*;
 
 /**
  *
@@ -21,11 +20,19 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(Reputation.get_reputation(6));
+        System.out.println(Inference.infer_trust_between(8, 11));
+        //test_reputation();
+        //test_maturity_level();
+        //test_evaluation_correlation();
+        //test_trust_inference();
+    }
+    
+    public static void test_reputation(){
+        System.out.println(Reputation.get_reputation(11));
     }
     
     public static void test_maturity_level(){
-        System.out.println(MaturityLevel.get_level(5));
+        System.out.println(MaturityLevel.get_level(11));
     }
     
     public static void test_trust_inference(){

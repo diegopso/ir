@@ -15,7 +15,11 @@ public class OpinionCorrelation {
     public static double correlation_between(Integer source_id, Integer sink_id){
         ModelViewEvaluations values = ModelViewEvaluations.get_evaluations_lists(source_id, sink_id);
         
-        Integer[] A = new Integer[values.aValues.size()];
+        int aSize = values.aValues.size();
+        if(aSize == 0)
+            return 0.0;
+        
+        Integer[] A = new Integer[aSize];
         Integer[] B = new Integer[values.bValues.size()];
         
         values.aValues.toArray(A);
