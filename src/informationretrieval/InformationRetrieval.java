@@ -9,6 +9,7 @@ import wbsn.*;
 import java.util.ArrayList;
 import java.util.Map;
 import tsweetselements.MaturityLevel;
+import tsweetselements.Reputation;
 
 /**
  *
@@ -20,6 +21,10 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println(Reputation.get_reputation(6));
+    }
+    
+    public static void test_maturity_level(){
         System.out.println(MaturityLevel.get_level(5));
     }
     
