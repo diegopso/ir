@@ -15,10 +15,7 @@ public class MaturityLevel {
         return MaturityLevel.get_level(ModelEvaluation.get_evaluations_for_user(user_id));
     }
     
-    private static double get_level(ArrayList<ModelEvaluation> evaluations){
-        if(evaluations.size() == 0) 
-            return 0.0;
-        
+    private static double get_level(ArrayList<ModelEvaluation> evaluations){        
         Map<Double, Double> notes = MaturityLevel.get_count_and_average(evaluations);
         
         Set<Map.Entry<Double, Double>> a = notes.entrySet();

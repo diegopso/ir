@@ -17,9 +17,6 @@ public class Reputation {
         
         int size = values.size();
         
-        if(size == 0)
-            return 0.0;
-        
         Double[] values_avg = new Double[size];
         values.toArray(values_avg);
         

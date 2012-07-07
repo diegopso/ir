@@ -3,6 +3,7 @@ package informationretrieval;
 import tsweetselements.OpinionCorrelation;
 import tsweetselements.TrustTransitivity;
 import connection.*;
+import extractors.DataBaseExtrator;
 import ir.*;
 import statistics.*;
 import wbsn.*;
@@ -20,11 +21,13 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //DataBaseExtrator.import_trust_network();
+        test_search_network();
+        test_trust_inference();
+    }
+    
+    public static void test_inference_between(){
         System.out.println(Inference.infer_trust_between(8, 11));
-        //test_reputation();
-        //test_maturity_level();
-        //test_evaluation_correlation();
-        //test_trust_inference();
     }
     
     public static void test_reputation(){
@@ -40,9 +43,7 @@ public class InformationRetrieval {
     }
     
     public static void test_search_network(){
-        ModelViewTrustRelationships trust = new ModelViewTrustRelationships();
-        
-        Network net = new Network(trust.relationship_matrix);
+        Network net = new Network(ModelViewTrustRelationships.getRelationship_matrix());
         net.mapPaths(8, 11);
         ArrayList<Path> paths = net.paths;
         

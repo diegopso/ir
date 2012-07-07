@@ -16,8 +16,6 @@ public class OpinionCorrelation {
         ModelViewEvaluations values = ModelViewEvaluations.get_evaluations_lists(source_id, sink_id);
         
         int aSize = values.aValues.size();
-        if(aSize == 0)
-            return 0.0;
         
         Integer[] A = new Integer[aSize];
         Integer[] B = new Integer[values.bValues.size()];

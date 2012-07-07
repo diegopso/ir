@@ -35,11 +35,11 @@ public class Network {
         lineLen = relationship_matrix.length;
     }
     
-    public void mapPaths(Integer source, Integer sink){
+    public void mapPaths(int source, int sink){
         mapPaths(source, sink, new Path());
     }
     
-    private void mapPaths(Integer source, Integer sink, Path previous_path){
+    private void mapPaths(int source, int sink, Path previous_path){
         previous_path.add(source);
         
         for (int i = 0; i < lineLen; i++) {

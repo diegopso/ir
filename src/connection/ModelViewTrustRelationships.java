@@ -1,5 +1,6 @@
 package connection;
 
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,39 +10,49 @@ import java.util.ArrayList;
  * @author Diego
  */
 public class ModelViewTrustRelationships {
-    public boolean[][] relationship_matrix;
-    public ArrayList<ModelTrust> trust_info;
+    private static boolean[][] relationship_matrix = null;
+    private static int[][] trust_info = null;
 
-    public ModelViewTrustRelationships() {
-        this.factory();
+    public static int[][] getTrust_info() {
+        if(trust_info == null)
+            factory();
+        return trust_info;
+    }
+
+    public static boolean[][] getRelationship_matrix() {
+        if(relationship_matrix == null)
+            factory();
+        return relationship_matrix;
     }
     
-    public void factory(){
+    private static void factory(){
         try {
-            MySqlConnect db = new MySqlConnect();
-            db.connect();
+            BufferedReader d = new BufferedReader(new FileReader("data/trust_matrix.txt"));
+            String line = null;
+            int row = 0, size = 0, i = 0, value = 0;
+            String[] brokenLine = null;
             
-            ResultSet rs = db.exec("SELECT user_source_id, user_sink_id, trust_source_sink, trust_sink_source FROM user_relationships WHERE trust_sink_source IS NOT NULL OR trust_source_sink IS NOT NULL;");
-            
-            ResultSet s = db.exec("SELECT MAX(id) AS max FROM users;");
-            s.next();
-            Integer size = s.getInt("max");
-            relationship_matrix = new boolean[size + 1][size + 1];
-            
-            trust_info = new ArrayList<ModelTrust>();            
-            
-            while (rs.next()) {
-                int source_id = rs.getInt("user_source_id");
-                int sink_id = rs.getInt("user_sink_id");
+            //be faster
+            if((line = d.readLine()) != null){
+                brokenLine = line.split(";");
                 
-                relationship_matrix[source_id][sink_id] = rs.getObject("trust_source_sink") != null;
-                relationship_matrix[sink_id][source_id] = rs.getObject("trust_sink_source") != null;
+                size = brokenLine.length;
+                relationship_matrix = new boolean[size][size];
+                trust_info = new int[size][size];
+                row++;
                 
-                trust_info.add(new ModelTrust(source_id, sink_id, rs.getInt("trust_source_sink"), rs.getInt("trust_sink_source")));
+                while ((line = d.readLine()) != null) {
+                    brokenLine = line.split(";");
+
+                    for(i = 0; i < size; i++){
+                        value = Integer.parseInt(brokenLine[i]);
+                        relationship_matrix[row][i] = value != -1;
+                        trust_info[row][i] = Integer.parseInt(brokenLine[i]);
+                    }
+                    row++;
+                }
             }
-            
-            db.close();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.toString());
         }
     }
