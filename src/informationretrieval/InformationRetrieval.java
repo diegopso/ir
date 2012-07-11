@@ -29,10 +29,12 @@ public class InformationRetrieval {
         //test_reputation();
         //ModelViewTrustRelationships.destroy();
         
-        DataBaseExtrator.import_contents();
-        ModelContent.factory();
-        test_centroid_similarity();
-        ModelContent.destroy();
+        //DataBaseExtrator.import_contents();
+        //ModelContent.factory();
+        //test_centroid_similarity();
+        //ModelContent.destroy();
+        
+        DataBaseExtrator.import_evaluations();
     }
     
     public static void test_inference_between(){

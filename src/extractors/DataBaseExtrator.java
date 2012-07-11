@@ -21,6 +21,37 @@ public class DataBaseExtrator {
         
     }
     
+    /**
+     * gera um .txt com as linhas contendo reviwer_id;author_id;object_id;value
+     */
+    public static void import_evaluations(){
+        try {
+            MySqlConnect db = new MySqlConnect();
+            db.connect();
+            
+            ResultSet rs = db.exec("SELECT e.user_id AS reviwer_id, c.user_id AS author_id, e.object_id, e.value FROM evaluations e INNER JOIN contents c ON e.object_id = c.id AND e.object_type = 'content' WHERE e.value IS NOT NULL;");          
+            
+            File f = new File("data/evaluations.txt");
+            if (f.exists()) {
+                f.delete();
+            }
+            
+            FileWriter x = new FileWriter("data/evaluations.txt", true);
+            String texto = "";
+            
+            while (rs.next()) {
+                texto += rs.getInt("reviwer_id") + ";" + rs.getInt("author_id") + ";" + rs.getInt("object_id") + ";" + rs.getInt("value") + "\n";
+            }
+            
+            x.write(texto);
+            x.close();
+            
+            db.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     public static void import_contents(){
         try {
             MySqlConnect db = new MySqlConnect();

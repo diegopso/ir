@@ -73,10 +73,6 @@ public class ModelContent {
         contents = null;
     }
     
-    public ArrayList<ModelEvaluation> get_evaluations(){
-        return ModelEvaluation.get_evaluations_by_content(content_id);
-    }
-    
     public static ModelContent get(Integer content_id){
         try {
             MySqlConnect db = new MySqlConnect();
