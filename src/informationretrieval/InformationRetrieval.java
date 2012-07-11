@@ -29,7 +29,10 @@ public class InformationRetrieval {
         //test_reputation();
         //ModelViewTrustRelationships.destroy();
         
-        
+        DataBaseExtrator.import_contents();
+        ModelContent.factory();
+        test_centroid_similarity();
+        ModelContent.destroy();
     }
     
     public static void test_inference_between(){
@@ -64,8 +67,8 @@ public class InformationRetrieval {
     }
     
     private static void test_centroid_similarity(){
-        ArrayList<ModelContent> aContents = ModelContent.get_contents_by_user(5);
-        ArrayList<ModelContent> bContents = ModelContent.get_contents_by_user(6);
+        ArrayList<ModelContent> aContents = ModelContent.getContents(5);
+        ArrayList<ModelContent> bContents = ModelContent.getContents(6);
         
         ArrayList<Content> alpha = ModelContent.toContents(aContents);
         ArrayList<Content> beta = ModelContent.toContents(bContents);

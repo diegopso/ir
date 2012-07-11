@@ -21,6 +21,34 @@ public class DataBaseExtrator {
         
     }
     
+    public static void import_contents(){
+        try {
+            MySqlConnect db = new MySqlConnect();
+            db.connect();
+            
+            //remover especificidade de tipo = text quando for melhorar
+            ResultSet rs = db.exec("SELECT id, user_id, text FROM contents WHERE type = 'text';");        
+            
+            File f = new File("data/contents.txt");
+            if (f.exists()) {
+                f.delete();
+            }
+
+            FileWriter x = new FileWriter("data/contents.txt", true);
+            String texto = "";
+            
+            while (rs.next()) {
+                texto += rs.getInt("id") + ";" + rs.getInt("user_id") + ";" + rs.getString("text") + "\n";
+            }
+            
+            x.write(texto);
+            x.close();
+            db.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     public static void import_trust_network(){
         try {
             MySqlConnect db = new MySqlConnect();
