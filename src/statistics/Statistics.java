@@ -115,7 +115,7 @@ public class Statistics {
      * @param values valores sobre os quais deve-se calcular a média
      * @return a média dos valores passados como parametro
      */
-    private static Double average(Integer[] values) {
+    public static Double average(Integer[] values) {
         Double sum = sum(values);
         return sum / values.length;
     }

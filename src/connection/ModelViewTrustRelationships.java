@@ -14,18 +14,19 @@ public class ModelViewTrustRelationships {
     private static int[][] trust_info = null;
 
     public static int[][] getTrust_info() {
-        if(trust_info == null)
-            factory();
         return trust_info;
     }
 
     public static boolean[][] getRelationship_matrix() {
-        if(relationship_matrix == null)
-            factory();
         return relationship_matrix;
     }
     
-    private static void factory(){
+    public static void destroy(){
+        trust_info = null;
+        relationship_matrix = null;
+    }
+    
+    public static void factory(){
         try {
             BufferedReader d = new BufferedReader(new FileReader("data/trust_matrix.txt"));
             String line = null;
@@ -47,7 +48,7 @@ public class ModelViewTrustRelationships {
                     for(i = 0; i < size; i++){
                         value = Integer.parseInt(brokenLine[i]);
                         relationship_matrix[row][i] = value != -1;
-                        trust_info[row][i] = Integer.parseInt(brokenLine[i]);
+                        trust_info[row][i] = value;
                     }
                     row++;
                 }

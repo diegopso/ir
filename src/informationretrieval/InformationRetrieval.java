@@ -22,8 +22,14 @@ public class InformationRetrieval {
      */
     public static void main(String[] args) {
         //DataBaseExtrator.import_trust_network();
-        test_search_network();
-        test_trust_inference();
+        
+        //ModelViewTrustRelationships.factory();
+        //test_search_network();
+        //test_trust_inference();
+        //test_reputation();
+        //ModelViewTrustRelationships.destroy();
+        
+        
     }
     
     public static void test_inference_between(){

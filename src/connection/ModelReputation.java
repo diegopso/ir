@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package connection;
 
 import java.sql.ResultSet;
@@ -13,34 +9,24 @@ import java.util.ArrayList;
  * @author Diego
  */
 public class ModelReputation {
-    public ArrayList<Double> values;
-    public Integer user_id;
+    private static ArrayList<Integer> values;
 
-    public ModelReputation() {
-        values = new ArrayList<Double>();
-        user_id = 0;
+    public static ArrayList<Integer> getValues(Integer user_id) {
+        factory(user_id);
+        return values;
     }
     
-    public ModelReputation(Integer user_id){
-        values = new ArrayList<Double>();
+    private static void factory(Integer user_id){
+        values = new ArrayList<Integer>();
         
-        try {
-            MySqlConnect db = new MySqlConnect();
-            db.connect();
-            
-            ResultSet rs = db.exec("SELECT trust_source_sink AS value FROM user_relationships WHERE (user_sink_id = " + user_id + " AND trust_source_sink IS NOT NULL) UNION SELECT trust_sink_source AS value FROM user_relationships WHERE (user_source_id = " + user_id + " AND trust_sink_source IS NOT NULL);");            
-            
-            this.user_id = user_id;
-            
-            while (rs.next()) {
-                this.values.add((double) rs.getInt("value") / 10.0);
+        boolean[][] relationship_matrix = ModelViewTrustRelationships.getRelationship_matrix();
+        int[][] trust_info = ModelViewTrustRelationships.getTrust_info();
+        int size = relationship_matrix.length;
+
+        for (int i = 0; i < size; i++) {
+            if(relationship_matrix[i][user_id]){
+                values.add(trust_info[i][user_id]);
             }
-            
-            db.close();
-            
-        } catch (SQLException ex) {
-            //be safe
-            
         }
     }
 }
