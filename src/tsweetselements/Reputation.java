@@ -23,13 +23,13 @@ public class Reputation {
         
         double reputation;
         int size;
-        Integer[] values_avg;
-        ArrayList<Integer> values;
+        Double[] values_avg;
+        ArrayList<Double> values;
         
         values = ModelReputation.getValues(user_id);
         size = values.size();
         
-        values_avg = new Integer[size];
+        values_avg = new Double[size];
         values.toArray(values_avg);
         
         reputation = statistics.Statistics.average(values_avg);

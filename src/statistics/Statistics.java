@@ -152,7 +152,7 @@ public class Statistics {
             sum += (aValues[i] - a) * (bValues[i] - b);
         }
         
-        sum /= (Math.sqrt(square_sum(aValues, a))*Math.sqrt(square_sum(bValues, b)));
+        sum /= (Math.sqrt(square_sum(aValues, a)) * Math.sqrt(square_sum(bValues, b)));
         
         return Double.isNaN(sum) ? 0 : sum;
     }
@@ -228,6 +228,16 @@ public class Statistics {
      * @param list
      */
     public static void Log(ArrayList<?> list){
+        for (Object object : list) {
+            System.out.println(object);
+        }
+    }
+    
+    /**
+     * Imprime os itens de um ArrayList, para propósitos de depuracao.
+     * @param list
+     */
+    public static void Log(Object[] list){
         for (Object object : list) {
             System.out.println(object);
         }

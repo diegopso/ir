@@ -31,25 +31,24 @@ public class ModelViewEvaluations {
     }
     
     public static ModelViewEvaluations get_evaluations_lists(Integer aUser_id, Integer bUser_id){
-        try {
-            MySqlConnect db = new MySqlConnect();
-            db.connect();
-            ArrayList<Integer> aValues = new ArrayList<Integer>(), bValues = new ArrayList<Integer>();
-            
-            ResultSet rs = db.exec("SELECT e1.value AS aValue, e2.value AS bValue FROM evaluations e1 INNER JOIN evaluations e2 ON e1.object_type = 'content' AND e2.object_type = 'content' AND e1.object_id = e2.object_id WHERE e1.user_id = "+ aUser_id +" AND e2.user_id = "+ bUser_id +";");
-            
-            if(rs == null) return new ModelViewEvaluations();            
-            
-            while (rs.next()) {
-                aValues.add(rs.getInt("aValue"));
-                bValues.add(rs.getInt("bValue"));
+        ArrayList<ModelEvaluation> aEvaluations = ModelEvaluation.get_evaluations_by_user(aUser_id);
+        ArrayList<ModelEvaluation> bEvaluations = ModelEvaluation.get_evaluations_by_user(bUser_id);
+        
+        ModelViewEvaluations model = new ModelViewEvaluations();
+        int size = aEvaluations.size();
+        
+        model.aUser_id = aUser_id;
+        model.bUser_id = bUser_id;
+        
+        for (ModelEvaluation a : aEvaluations) {
+            for (ModelEvaluation b : bEvaluations) {
+                if(a.object_id == b.object_id){
+                    model.aValues.add(a.value);
+                    model.bValues.add(b.value);
+                }
             }
-            
-            db.close();
-            return new ModelViewEvaluations(aValues, bValues, aUser_id, bUser_id);
-        } catch (SQLException ex) {
-            //be safe
-            return new ModelViewEvaluations();
         }
+        
+        return model;
     }
 }

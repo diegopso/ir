@@ -21,36 +21,56 @@ public class InformationRetrieval {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //importar os dados do banco para os arquivos texto
         //DataBaseExtrator.import_trust_network();
-        
-        //ModelViewTrustRelationships.factory();
-        //test_search_network();
-        //test_trust_inference();
-        //test_reputation();
-        //ModelViewTrustRelationships.destroy();
-        
         //DataBaseExtrator.import_contents();
-        //ModelContent.factory();
-        //test_centroid_similarity();
-        //ModelContent.destroy();
+        //DataBaseExtrator.import_evaluations();
         
-        DataBaseExtrator.import_evaluations();
+        //teste de cada uma das metricas
+        //test_reputation();
+        //test_centroid_similarity();
+        //test_evaluation_correlation();
+        //test_trust_inference();
+        //test_maturity_level();
+        
+        //teste geral entre dois usuários
+        test_inference_between();
     }
     
+    /**
+     * Testa a inferência de confiança entre dois nós, teste final entre dois usuários
+     */
     public static void test_inference_between(){
+        ModelViewTrustRelationships.factory();
         System.out.println(Inference.infer_trust_between(8, 11));
+        ModelViewTrustRelationships.destroy();
     }
     
+    /**
+     * Testa a analise de reputacao
+     */
     public static void test_reputation(){
+        ModelViewTrustRelationships.factory();
         System.out.println(Reputation.get_reputation(11));
+        ModelViewTrustRelationships.destroy();
     }
     
+    /**
+     * Testa a analise do nivel de maturidade
+     */
     public static void test_maturity_level(){
-        System.out.println(MaturityLevel.get_level(11));
+        ModelEvaluation.factory();
+        System.out.println(MaturityLevel.get_level(5));
+        ModelEvaluation.destroy();
     }
     
+    /**
+     * testa a inferencia de confianca entre dois usuários
+     */
     public static void test_trust_inference(){
+        ModelViewTrustRelationships.factory();
         System.out.println(TrustTransitivity.trust_between(8, 11));
+        ModelViewTrustRelationships.destroy();
     }
     
     public static void test_search_network(){
@@ -64,13 +84,23 @@ public class InformationRetrieval {
         }
     }
     
+    /**
+     * Testa a analise de correlacao entre os usuários com base nas informações de avaliacoes
+     */
     public static void test_evaluation_correlation(){
+        ModelEvaluation.factory();
         System.out.println(OpinionCorrelation.correlation_between(8, 11));
+        ModelEvaluation.destroy();
     }
     
+    /**
+     * Testa a analise de similaridade dos perfis de conhecimento dos usuários.
+     */
     private static void test_centroid_similarity(){
+        ModelContent.factory();
         ArrayList<ModelContent> aContents = ModelContent.getContents(5);
         ArrayList<ModelContent> bContents = ModelContent.getContents(6);
+        ModelContent.destroy();
         
         ArrayList<Content> alpha = ModelContent.toContents(aContents);
         ArrayList<Content> beta = ModelContent.toContents(bContents);
@@ -78,6 +108,9 @@ public class InformationRetrieval {
         System.out.println(Content.contentSimilarity(Centroid.getCentroid(alpha), Centroid.getCentroid(beta)));
     }
     
+    /**
+     * Testa a distribuicao de frequencia dos termos de um texto.
+     */
     private static void test_count_frequency(){
         Map <String, Integer> map = new Content("Um Banco de Dados Relacional é um banco de dados que segue o Modelo Relacional. Um Banco de Dados Relacional é um conceito abstrato que define maneiras de armazenar, manipular e recuperar dados estruturados unicamente na forma de tabelas, construindo um banco de dados. O termo é aplicado aos próprios dados, quando organizados dessa forma, ou a um Sistema Gerenciador de Banco de Dados Relacional (SGBDR) – do inglês Relational database management system (RDBMS) – um programa de computador que implementa a abstração.").instance();
         
@@ -89,10 +122,18 @@ public class InformationRetrieval {
         }
     }
     
+    /**
+     * Testa o pre-processamento dos textos, com um texto padrão.
+     * @param text 
+     */
     private static void test(){
         test("Um Banco de Dados Relacional é um banco de dados que segue o Modelo Relacional. Um Banco de Dados Relacional é um conceito abstrato que define maneiras de armazenar, manipular e recuperar dados estruturados unicamente na forma de tabelas, construindo um banco de dados. O termo é aplicado aos próprios dados, quando organizados dessa forma, ou a um Sistema Gerenciador de Banco de Dados Relacional (SGBDR) – do inglês Relational database management system (RDBMS) – um programa de computador que implementa a abstração.");
     }
     
+    /**
+     * Testa o pre-processamento dos textos.
+     * @param text 
+     */
     private static void test(String text){
         System.out.println("_____BreakWords_____");
         ArrayList<String> breakWords = ir.BrazilianWordBreaker.breakIt(text);

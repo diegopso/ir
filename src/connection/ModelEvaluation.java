@@ -61,13 +61,12 @@ public class ModelEvaluation {
     
     public static void factory(){
         try {
-            BufferedReader d = new BufferedReader(new FileReader("data/contents.txt"));
+            BufferedReader d = new BufferedReader(new FileReader("data/evaluations.txt"));
             String line;
             String[] brokenLine;
-                
+              
             while ((line = d.readLine()) != null) {
                 brokenLine = line.split(";");
-                
                 evaluations.add(new ModelEvaluation(Integer.parseInt(brokenLine[0]), Integer.parseInt(brokenLine[1]), Integer.parseInt(brokenLine[2]), Integer.parseInt(brokenLine[3])));
             }
         } catch (Exception ex) {

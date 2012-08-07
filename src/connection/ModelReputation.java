@@ -9,15 +9,15 @@ import java.util.ArrayList;
  * @author Diego
  */
 public class ModelReputation {
-    private static ArrayList<Integer> values;
+    private static ArrayList<Double> values;
 
-    public static ArrayList<Integer> getValues(Integer user_id) {
+    public static ArrayList<Double> getValues(Integer user_id) {
         factory(user_id);
         return values;
     }
     
     private static void factory(Integer user_id){
-        values = new ArrayList<Integer>();
+        values = new ArrayList<Double>();
         
         boolean[][] relationship_matrix = ModelViewTrustRelationships.getRelationship_matrix();
         int[][] trust_info = ModelViewTrustRelationships.getTrust_info();
@@ -25,7 +25,7 @@ public class ModelReputation {
 
         for (int i = 0; i < size; i++) {
             if(relationship_matrix[i][user_id]){
-                values.add(trust_info[i][user_id]);
+                values.add((double)trust_info[i][user_id] / 10);
             }
         }
     }
