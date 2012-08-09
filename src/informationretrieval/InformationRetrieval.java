@@ -42,8 +42,12 @@ public class InformationRetrieval {
      */
     public static void test_inference_between(){
         ModelViewTrustRelationships.factory();
-        System.out.println(Inference.infer_trust_between(8, 11));
+        ModelEvaluation.factory();
+        ModelContent.factory();
+        System.out.println(Inference.infer_trust_between(5, 6));
         ModelViewTrustRelationships.destroy();
+        ModelEvaluation.destroy();
+        ModelContent.destroy();
     }
     
     /**

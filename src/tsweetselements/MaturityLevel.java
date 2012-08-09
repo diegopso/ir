@@ -16,25 +16,14 @@ public class MaturityLevel {
     }
     
     private static double get_level(ArrayList<ModelEvaluation> evaluations){        
-        Map<Double, Double> notes = MaturityLevel.get_count_and_average(evaluations);
-        
-        Set<Map.Entry<Double, Double>> a = notes.entrySet();
-        Double[] values = new Double[a.size()];
-        
+        Double[] values = new Double[evaluations.size()];
         int i = 0;
-        for (Map.Entry<Double, Double> entry : a) {
-            values[i++] = entry.getValue();
+        
+        for (ModelEvaluation model : evaluations) {
+            values[i++] = (double)model.value;
         }
         
-        Set<Double> b = notes.keySet();
-        Double[] weights = new Double[b.size()];
-        
-        i = 0;
-        for (Double entry : b) {
-            weights[i++] = entry;
-        }
-        
-        return statistics.Statistics.weighted_average(values, weights);
+        return statistics.Statistics.average(values);
     }
     
     private static Map<Double, Double> get_count_and_average(ArrayList<ModelEvaluation> evaluations){
