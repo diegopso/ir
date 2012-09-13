@@ -23,7 +23,7 @@ public class MaturityLevel {
             values[i++] = (double)model.value;
         }
         
-        return statistics.Statistics.average(values);
+        return statistics.Statistics.average(values) / 10;
     }
     
     private static Map<Double, Double> get_count_and_average(ArrayList<ModelEvaluation> evaluations){

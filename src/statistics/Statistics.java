@@ -173,7 +173,10 @@ public class Statistics {
             sum += (aValues[i] - a) * (bValues[i] - b);
         }
         
-        sum /= (Math.sqrt(square_sum(aValues, a))*Math.sqrt(square_sum(bValues, b)));
+	double sqrtA = Math.sqrt(square_sum(aValues, a));
+	double sqrtB = Math.sqrt(square_sum(bValues, b));
+	
+        sum /= sqrtA * sqrtB;
         
         return Double.isNaN(sum) ? 0 : sum;
     }

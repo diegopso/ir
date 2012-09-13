@@ -1,3 +1,7 @@
-1;6;Bancos de dados, ou bases de dados (em Portugal), são coleções de informações que se relacionam de forma que crie um sentido.[1][2][3] São de vital importância para empresas, e há duas décadas se tornaram a principal peça dos sistemas de informação.[4][2][5] Normalmente existem por vários anos sem alterações em sua estrutura.[6][7]
-4;5;Um data warehouse (português brasileiro) ou armazém de dados (português europeu), ou ainda depósito de dados, é um sistema de computação utilizado para armazenar informações relativas às atividades de uma organização em bancos de dados, de forma consolidada. O desenho da base de dados favorece os relatórios, a análise de grandes volumes de dados e a obtenção de informações estratégicas que podem facilitar a tomada de decisão.
-6;5;Bancos de dados, ou bases de dados (em Portugal), são coleções de informações que se relacionam de forma que crie um sentido.[1][2][3] São de vital importância para empresas, e há duas décadas se tornaram a principal peça dos sistemas de informação.[4][2][5] Normalmente existem por vários anos sem alterações em sua estrutura.[6][7]
+45;5;BD BD BD BD BD DW DW DW DW DW DW DW DW DW DW DM DM DM DM DM DM DM
+46;5;OLAP OLAP OLAP OLAP OLAP BD BD BD BD BD BD
+47;7;BD BD BD BD BD BD BD BD Saude Saude Saude Saude Saude Saude Saude Saude Saude Saude Saude Saude Saude Saude Saude
+48;7;Saude Saude Saude Saude Saude Saude Saude Saude Saude Saude OLAP OLAP
+49;9;BD BD BD BD BD BD BD BD BD BD
+50;10;BD BD BD BD BD DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW DW
+51;10;OLAP OLAP OLAP

@@ -30,7 +30,7 @@ public class OpinionCorrelation {
         
         Integer[] A = new Integer[aSize];
         Integer[] B = new Integer[values.bValues.size()];
-        
+	
         values.aValues.toArray(A);
         values.bValues.toArray(B);
         

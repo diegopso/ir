@@ -16,68 +16,68 @@ import tsweetselements.*;
  * @author Diego
  */
 public class InformationRetrieval {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //importar os dados do banco para os arquivos texto
-        //DataBaseExtrator.import_trust_network();
-        //DataBaseExtrator.import_contents();
-        //DataBaseExtrator.import_evaluations();
-        
-        //teste de cada uma das metricas
-        //test_reputation();
-        //test_centroid_similarity();
-        //test_evaluation_correlation();
-        //test_trust_inference();
-        //test_maturity_level();
-        
-        //teste geral entre dois usuários
-        test_inference_between();
+	ModelViewTrustRelationships.factory();
+        ModelEvaluation.factory();
+        ModelContent.factory();
+	
+	assertion(5, 10);
+	assertion(5, 7);
+	
+	ModelViewTrustRelationships.destroy();
+        ModelEvaluation.destroy();
+        ModelContent.destroy();
+    }
+    
+    public static void assertion(int source_id, int sink_id){        
+        double ti = test_trust_inference(source_id, sink_id);
+	double cb = test_correlation_between(source_id, sink_id);
+	double ml = test_maturity_level(sink_id);
+	double r = test_reputation(sink_id);
+	double i = test_inference_between(source_id, sink_id);
+	
+	System.out.println("Transitividade: " + ti + " Correlação: " + cb + " Nivel de Maturidade: " + ml + " Reputação: " + r + " TOTAL: " + i + " ");
     }
     
     /**
      * Testa a inferência de confiança entre dois nós, teste final entre dois usuários
      */
-    public static void test_inference_between(){
-        ModelViewTrustRelationships.factory();
-        ModelEvaluation.factory();
-        ModelContent.factory();
-        System.out.println(Inference.infer_trust_between(5, 6));
-        ModelViewTrustRelationships.destroy();
-        ModelEvaluation.destroy();
-        ModelContent.destroy();
+    public static Double test_inference_between(int source_id, int sink_id){
+        return Inference.infer_trust_between(source_id, sink_id);
     }
     
     /**
      * Testa a analise de reputacao
      */
-    public static void test_reputation(){
-        ModelViewTrustRelationships.factory();
-        System.out.println(Reputation.get_reputation(11));
-        ModelViewTrustRelationships.destroy();
+    public static Double test_reputation(int sink_id){
+        return Reputation.get_reputation(sink_id);
     }
     
     /**
      * Testa a analise do nivel de maturidade
      */
-    public static void test_maturity_level(){
-        ModelEvaluation.factory();
-        System.out.println(MaturityLevel.get_level(5));
-        ModelEvaluation.destroy();
+    public static double test_maturity_level(int sink_id){
+        return MaturityLevel.get_level(sink_id);
     }
     
     /**
      * testa a inferencia de confianca entre dois usuários
      */
-    public static void test_trust_inference(){
-        ModelViewTrustRelationships.factory();
-        System.out.println(TrustTransitivity.trust_between(8, 11));
-        ModelViewTrustRelationships.destroy();
+    public static double test_trust_inference(int source_id, int sink_id){
+        return TrustTransitivity.trust_between(source_id, sink_id);
     }
     
-    public static void test_search_network(){
+    /**
+     * Testa a inferência de confiança entre dois nós, teste final entre dois usuários
+     */
+    public static double test_correlation_between(int source_id, int sink_id){
+        return OpinionCorrelation.correlation_between(source_id, sink_id);
+    }
+    
+    public static void test_search_network(int source_id, int sink_id){
         Network net = new Network(ModelViewTrustRelationships.getRelationship_matrix());
         net.mapPaths(8, 11);
         ArrayList<Path> paths = net.paths;
@@ -91,25 +91,15 @@ public class InformationRetrieval {
     /**
      * Testa a analise de correlacao entre os usuários com base nas informações de avaliacoes
      */
-    public static void test_evaluation_correlation(){
-        ModelEvaluation.factory();
-        System.out.println(OpinionCorrelation.correlation_between(8, 11));
-        ModelEvaluation.destroy();
+    public static void test_evaluation_correlation(int source_id, int sink_id){
+        System.out.println(OpinionCorrelation.evaluation_similarity(source_id, sink_id));
     }
     
     /**
      * Testa a analise de similaridade dos perfis de conhecimento dos usuários.
      */
-    private static void test_centroid_similarity(){
-        ModelContent.factory();
-        ArrayList<ModelContent> aContents = ModelContent.getContents(5);
-        ArrayList<ModelContent> bContents = ModelContent.getContents(6);
-        ModelContent.destroy();
-        
-        ArrayList<Content> alpha = ModelContent.toContents(aContents);
-        ArrayList<Content> beta = ModelContent.toContents(bContents);
-        
-        System.out.println(Content.contentSimilarity(Centroid.getCentroid(alpha), Centroid.getCentroid(beta)));
+    private static void test_centroid_similarity(int source_id, int sink_id){
+        System.out.println(OpinionCorrelation.knowledge_profile_similarity(source_id, sink_id));
     }
     
     /**

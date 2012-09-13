@@ -16,7 +16,7 @@ public class MySqlConnect {
     private Connection connection;
     
     public MySqlConnect() {
-        config = new ConnectionConfig("localhost", "konnen-db", "root", "root");
+        config = new ConnectionConfig("localhost", "konnen-db", "root", "");
     }
 
     public MySqlConnect(String serverName, String database, String username, String password) {

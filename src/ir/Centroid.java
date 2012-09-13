@@ -13,21 +13,19 @@ public class Centroid {
         
         for (Content c : contents) {
             ArrayList<String> t = c.getTerms();
-            t.removeAll(terms);
+	    t.removeAll(terms);
             terms.addAll(t);
         }
         
         ArrayList<Integer> frequency = new ArrayList<Integer>(terms.size());
         
         for (String t : terms) {
-            int freq = 0, maxFreq = 1;
+            int freq = 0;
             for (Content c : contents) {
                 int f = c.get(t).frequency;
-                if(f > maxFreq)
-                    maxFreq = f;
                 freq += f;
             }
-            frequency.add(Math.round((float) freq / maxFreq));
+            frequency.add(freq);
         }
         
         return new Content(terms, frequency);

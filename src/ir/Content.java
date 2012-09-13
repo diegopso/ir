@@ -36,6 +36,10 @@ public class Content {
     }
 
     public ArrayList<String> getTerms() {
+	ArrayList<String> terms = new ArrayList<String>();
+	for (String str : this.terms) {
+	    terms.add(str);
+	}
         return terms;
     }
 
