@@ -1,0 +1,1 @@
+C:\xampp\mysql\bin\mysql.exe --user=%1 --password=%2 -h %3 %4 < %5;

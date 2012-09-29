@@ -22,6 +22,10 @@ public class ModelEvaluation {
     public static ArrayList<ModelEvaluation> getEvaluations() {
         return evaluations;
     }
+	
+	public static int get_evaluations_size(){
+		return evaluations.size();
+	}
 
     public static ArrayList<ModelEvaluation> get_evaluations_for_user(int user_id) {
         ArrayList<ModelEvaluation> evaluations = new ArrayList<ModelEvaluation>();

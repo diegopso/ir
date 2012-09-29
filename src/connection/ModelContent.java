@@ -23,6 +23,10 @@ public class ModelContent {
     public String path = "Not yet...";
     
     private static ArrayList<ModelContent> contents = new ArrayList<ModelContent>();
+	
+	public static int get_contents_size(){
+		return contents.size();
+	}
 
     public static ArrayList<ModelContent> getContents() {
         return contents;

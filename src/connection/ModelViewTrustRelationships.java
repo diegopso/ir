@@ -12,6 +12,11 @@ import java.util.ArrayList;
 public class ModelViewTrustRelationships {
     private static boolean[][] relationship_matrix = null;
     private static int[][] trust_info = null;
+	private static int matrix_size;
+	
+	public static int get_matrix_size(){
+		return ModelViewTrustRelationships.matrix_size;
+	}
 
     public static int[][] getTrust_info() {
         return trust_info;
@@ -38,6 +43,7 @@ public class ModelViewTrustRelationships {
                 brokenLine = line.split(";");
                 
                 size = brokenLine.length;
+				ModelViewTrustRelationships.matrix_size = size;
                 relationship_matrix = new boolean[size][size];
                 trust_info = new int[size][size];
                 row++;

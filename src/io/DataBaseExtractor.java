@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package extractors;
+package io;
 
 import connection.*;
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Diego
  */
-public class DataBaseExtrator {
+public class DataBaseExtractor {
     public static void import_data(){
         
     }
