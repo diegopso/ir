@@ -15,14 +15,14 @@ import java.sql.ResultSet;
  * @author Diego
  */
 public class DataBaseInjector {
-	private static String root = "D:\\GitProjects\\ir\\data\\";
+	private static String root = "/home/user/Documentos/ir/data/";
 	
 	public static void save_infered_values() {
 		try {
-			MySqlConnect db = new MySqlConnect();
-            db.connect();
-			db.executeSqlFile(root + "inference.txt");
-			db.close();
+                    MySqlConnect db = new MySqlConnect();
+                    db.connect();
+                    db.executeSqlFile(root + "inference.txt");
+                    db.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

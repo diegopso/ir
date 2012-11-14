@@ -12,17 +12,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import tsweetselements.*;
 
-/**
- *
- * @author Diego
- */
 public class InformationRetrieval {
 
-	/**
-	 * @param args the command line arguments
-	 */
+
 	public static void main(String[] args) {
-		//DataBaseExtractor.import_data();
+		DataBaseExtractor.import_data();
+
 		ModelViewTrustRelationships.factory();
 		ModelEvaluation.factory();
 		ModelContent.factory();
@@ -34,7 +29,7 @@ public class InformationRetrieval {
 		ModelViewTrustRelationships.destroy();
 		ModelEvaluation.destroy();
 		ModelContent.destroy();
-		
+                
 		DataBaseInjector.save_infered_values();
 	}
 
@@ -134,11 +129,6 @@ public class InformationRetrieval {
 		test("Um Banco de Dados Relacional é um banco de dados que segue o Modelo Relacional. Um Banco de Dados Relacional é um conceito abstrato que define maneiras de armazenar, manipular e recuperar dados estruturados unicamente na forma de tabelas, construindo um banco de dados. O termo é aplicado aos próprios dados, quando organizados dessa forma, ou a um Sistema Gerenciador de Banco de Dados Relacional (SGBDR) – do inglês Relational database management system (RDBMS) – um programa de computador que implementa a abstração.");
 	}
 
-	/**
-	 * Testa o pre-processamento dos textos.
-	 *
-	 * @param text
-	 */
 	private static void test(String text) {
 		System.out.println("_____BreakWords_____");
 		ArrayList<String> breakWords = ir.BrazilianWordBreaker.breakIt(text);

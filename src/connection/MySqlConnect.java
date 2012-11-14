@@ -12,10 +12,10 @@ public class MySqlConnect {
 	private static String status = "unconnected";
 	private ConnectionConfig config;
 	private Connection connection;
-	private static String installation_file = "C:\\xampp\\mysql\\bin\\";
+	private static String installation_file = "/opt/lampp/bin/";
 
 	public MySqlConnect() {
-		config = new ConnectionConfig("localhost", "konnen-db", "root", "");
+		config = new ConnectionConfig("localhost", "konnen-db-0-1-0", "", "");
 	}
 
 	public MySqlConnect(String serverName, String database, String username, String password) {
@@ -92,7 +92,7 @@ public class MySqlConnect {
 	public void executeSqlFile(String path) {
 		try {
 			Runtime rt = Runtime.getRuntime();
-			String executeSqlCommand = "cmd /c " + this.installation_file + "mysql.exe --user="+ config.username +" --password=" + config.password + " -h " + config.serverName + " " + config.database + " < " + path;
+			String executeSqlCommand = this.installation_file + "mysql --user="+ config.username +" --password=" + config.password + " -h " + config.serverName + " " + config.database + " < " + path;
 			Process pr = rt.exec(executeSqlCommand);
 			int exitVal = pr.waitFor();
 			

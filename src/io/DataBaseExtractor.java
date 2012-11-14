@@ -18,7 +18,9 @@ import java.util.ArrayList;
  */
 public class DataBaseExtractor {
     public static void import_data(){
-        
+        import_evaluations();
+        import_contents();
+        import_trust_network();
     }
     
     /**
@@ -66,10 +68,11 @@ public class DataBaseExtractor {
             }
 
             FileWriter x = new FileWriter("data/contents.txt", true);
-            String texto = "";
+            String texto = "", contentText = "";
             
             while (rs.next()) {
-                texto += rs.getInt("id") + ";" + rs.getInt("user_id") + ";" + rs.getString("text") + "\n";
+                contentText = rs.getString("text").replaceAll("\n", "");
+                texto += rs.getInt("id") + ";" + rs.getInt("user_id") + ";" + contentText + "\n";
             }
             
             x.write(texto);
