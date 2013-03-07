@@ -22,20 +22,20 @@ public class InformationRetrieval {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		//DataBaseExtractor.import_data();
-		ModelViewTrustRelationships.factory();
-		ModelEvaluation.factory();
-		ModelContent.factory();
+		DataBaseExtractor.import_data();
+		//ModelViewTrustRelationships.factory();
+		//ModelEvaluation.factory();
+		//ModelContent.factory();
 
 		//assertion(5, 10);
 		//assertion(5, 7);
-		Inference.network_inference();
+		//Inference.network_inference();
 
-		ModelViewTrustRelationships.destroy();
-		ModelEvaluation.destroy();
-		ModelContent.destroy();
+		//ModelViewTrustRelationships.destroy();
+		//ModelEvaluation.destroy();
+		//ModelContent.destroy();
 		
-		DataBaseInjector.save_infered_values();
+		//DataBaseInjector.save_infered_values();
 	}
 
 	public static void assertion(int source_id, int sink_id) {

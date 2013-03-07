@@ -15,7 +15,7 @@ public class MySqlConnect {
 	private static String installation_file = "C:\\xampp\\mysql\\bin\\";
 
 	public MySqlConnect() {
-		config = new ConnectionConfig("localhost", "konnen-db", "root", "");
+		config = new ConnectionConfig("localhost", "konnen-db-0-1-0", "root", "");
 	}
 
 	public MySqlConnect(String serverName, String database, String username, String password) {

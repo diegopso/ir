@@ -70,9 +70,13 @@ public class Inference {
 			for (int j = 0; j < matrix_size; j++) {
 				if(i != j){
 					maturity = MaturityLevel.get_level(j);
+					Timer.turn();
 					opinion = OpinionCorrelation.correlation_between(i, j);
+					Timer.turn();
 					reputation = Reputation.get_reputation(j);
+					Timer.turn();
 					trust_transivity = TrustTransitivity.trust_between(i, j);
+					Timer.turn();
 					
 					if(Double.isNaN(maturity)){
 						maturity = 0.0;

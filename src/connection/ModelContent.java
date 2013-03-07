@@ -88,7 +88,7 @@ public class ModelContent {
             if(rs == null) return new ModelContent();
             
             db.close();
-            return new ModelContent(content_id, rs.getInt("user_id"), rs.getString("text"));
+			return new ModelContent(content_id, rs.getInt("user_id"), rs.getString("text").replaceAll("\n", " "));
         } catch (SQLException ex) {
             //be safe
             return new ModelContent();
