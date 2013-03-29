@@ -6,11 +6,17 @@ import connection.*;
 import io.DataBaseExtractor;
 import io.DataBaseInjector;
 import ir.*;
+import java.io.IOException;
 import statistics.*;
 import wbsn.*;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 import tsweetselements.*;
+import vendor.LattesXMLImport;
 
 /**
  *
@@ -22,9 +28,9 @@ public class InformationRetrieval {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		DataBaseExtractor.import_data();
+		//DataBaseExtractor.import_data();
 		//ModelViewTrustRelationships.factory();
-		//ModelEvaluation.factory();
+		//ModelContent.factory();
 		//ModelContent.factory();
 
 		//assertion(5, 10);
@@ -34,8 +40,11 @@ public class InformationRetrieval {
 		//ModelViewTrustRelationships.destroy();
 		//ModelEvaluation.destroy();
 		//ModelContent.destroy();
-		
+
 		//DataBaseInjector.save_infered_values();
+
+		//Teste de importacao de XML do Lattes
+		LattesXMLImport.import_data();
 	}
 
 	public static void assertion(int source_id, int sink_id) {

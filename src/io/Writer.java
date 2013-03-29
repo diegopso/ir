@@ -14,6 +14,8 @@ import tsweetselements.Inference;
  * @author Diego
  */
 public class Writer {
+	public static final String OUT_DIR = "data\\out\\";
+	public static final String IN_DIR = "data\\in\\";
 
 	public static void write_file(String content, String file) {
 		File f = new File(file);
