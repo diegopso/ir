@@ -31,7 +31,7 @@ public class ModelLattesIds {
 			List<ModelLattesIds> results = new ArrayList<ModelLattesIds>();
             db.connect();
 			
-            ResultSet rs = db.exec("SELECT id, lattes_id FROM profiles WHERE lattes_id IS NOT NULL;");
+            ResultSet rs = db.exec("SELECT p.id, l.description AS lattes_id FROM profiles p INNER JOIN lattes_infos l ON l.profile_id = p.id WHERE l.type = 'xml';");
             
             if(rs == null) return results;
 			

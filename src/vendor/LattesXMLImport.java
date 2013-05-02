@@ -42,7 +42,7 @@ public class LattesXMLImport {
 				str += "DELETE FROM `lattes_authors` WHERE `lattes_production_id` IN (SELECT p.id FROM `lattes_productions` p INNER JOIN `lattes_infos` i ON i.id = p.lattes_info_id WHERE i.profile_id = "+ p.profile_id +");\r\n";
 				str += "DELETE FROM `lattes_productions` WHERE `lattes_info_id` IN (SELECT id FROM `lattes_infos` WHERE profile_id = "+ p.profile_id +");\r\n";
 				str += "DELETE FROM `lattes_infos` WHERE profile_id = "+ p.profile_id +";\r\n";
-				Writer.log(str + import_file(Writer.IN_DIR + "lattes_files\\" + p.lattes_id + ".xml", p.profile_id), Writer.OUT_DIR + "lattes_data.sql");
+				Writer.log(str + import_file(Writer.IN_DIR + p.lattes_id, p.profile_id), Writer.OUT_DIR + "lattes_data.sql");
 			} catch (IOException ex) {
 				Logger.getLogger(LattesXMLImport.class.getName()).log(Level.SEVERE, null, ex);
 			}
