@@ -70,26 +70,28 @@ public class Inference {
 			for (int j = 0; j < matrix_size; j++) {
 				if(i != j){
 					maturity = MaturityLevel.get_level(j);
-					Timer.turn();
-					opinion = OpinionCorrelation.correlation_between(i, j);
-					Timer.turn();
-					reputation = Reputation.get_reputation(j);
-					Timer.turn();
-					trust_transivity = TrustTransitivity.trust_between(i, j);
-					Timer.turn();
-					
 					if(Double.isNaN(maturity)){
 						maturity = 0.0;
 					}
+					Timer.turn();
+					
+					opinion = OpinionCorrelation.correlation_between(i, j);
 					if(Double.isNaN(opinion)){
 						opinion = 0.0;
 					}
+					Timer.turn();
+					
+					reputation = Reputation.get_reputation(j);
 					if(Double.isNaN(reputation)){
 						reputation = 0.0;
 					}
+					Timer.turn();
+					
+					trust_transivity = TrustTransitivity.trust_between(i, j);
 					if(Double.isNaN(trust_transivity)){
 						trust_transivity = 0.0;
 					}
+					Timer.turn();
 					
 					st += String.format("INSERT INTO tsweets_infered_values (source_id, sink_id, maturity, opinion_correlation, reputation, trust_transivity) VALUES (%s,%s,%s,%s,%s,%s);\n", i, j, maturity, opinion, reputation, trust_transivity);
 					//st += i + ";" + j + ";" + maturity + ";" + opinion+ ";" + reputation+ ";" + trust_transivity + "\n";
